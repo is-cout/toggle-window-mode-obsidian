@@ -1,41 +1,29 @@
-import { App, Plugin, PluginSettingTab, Setting } from "obsidian";
-
-interface ToggleWindowModePluginSettings {
-	// Add plugin settings here as they're needed.
-}
-
-const DEFAULT_SETTINGS: ToggleWindowModePluginSettings = {};
+import { Plugin, setIcon } from "obsidian";
 
 export default class ToggleWindowModePlugin extends Plugin {
-	settings: ToggleWindowModePluginSettings;
-
-	async onload() {
-		await this.loadSettings();
-		this.addSettingTab(new ToggleWindowModePluginSettingTab(this.app, this));
+	onload() {
+		const ribbonIconEl = this.addRibbonIcon(
+			"shrink",
+			"Toggle window mode",
+			() => this.toggleWindowMode(ribbonIconEl)
+		);
 	}
 
 	onunload() {}
 
-	async loadSettings() {
-		this.settings = Object.assign({}, DEFAULT_SETTINGS, await this.loadData());
-	}
+	private toggleWindowMode(ribbonIconEl: HTMLElement) {
+		const win = require("electron").remote.getCurrentWindow();
+		const leftSplit = this.app.workspace.leftSplit;
+		const isCompact = leftSplit.collapsed;
 
-	async saveSettings() {
-		await this.saveData(this.settings);
-	}
-}
-
-class ToggleWindowModePluginSettingTab extends PluginSettingTab {
-	plugin: ToggleWindowModePlugin;
-
-	constructor(app: App, plugin: ToggleWindowModePlugin) {
-		super(app, plugin);
-		this.plugin = plugin;
-	}
-
-	display(): void {
-		const { containerEl } = this;
-		containerEl.empty();
-		new Setting(containerEl).setName("Toggle Window Mode").setHeading();
+		if (isCompact) {
+			leftSplit.expand();
+			win.maximize();
+			setIcon(ribbonIconEl, "shrink");
+		} else {
+			leftSplit.collapse();
+			win.unmaximize();
+			setIcon(ribbonIconEl, "expand");
+		}
 	}
 }

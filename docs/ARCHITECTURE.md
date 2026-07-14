@@ -10,7 +10,7 @@ Toggle Window Mode adds a ribbon icon that toggles the Obsidian window between t
 
 | File | Responsibility |
 |---|---|
-| `src/main.ts` | Plugin entry point: `onload`/`onunload`, settings load/save, settings tab. |
+| `src/main.ts` | Plugin entry point: `onload`/`onunload`, ribbon icon, window/sidebar toggle logic. |
 
 <!-- Add a row per new src/*.ts file as the project grows past a single file — this
      table is the map a new contributor (or future Claude session) reads first. -->

@@ -7,3 +7,6 @@ Format: `YYYY-MM-DD — short description. Why (if not obvious). Files touched.`
 ## 2026-07-14 (0.1.0)
 
 - **Initial scaffold** from the Obsidian plugin bootstrap template. Files: all.
+- **Ribbon toggle**: adds a ribbon icon that collapses the left sidebar and un-maximizes the
+  window (compact), or expands the sidebar and maximizes the window (expanded), in one click.
+  Uses `electron.remote.getCurrentWindow()` for window state. Files: `src/main.ts`.
