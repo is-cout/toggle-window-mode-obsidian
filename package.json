@@ -1,6 +1,6 @@
 {
   "name": "toggle-window-mode",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Collapse the left sidebar and shrink the window, or expand both back, with one click",
   "main": "main.js",
   "scripts": {
