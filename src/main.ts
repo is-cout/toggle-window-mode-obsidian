@@ -7,6 +7,12 @@ export default class ToggleWindowModePlugin extends Plugin {
 			"Toggle window mode",
 			() => this.toggleWindowMode(ribbonIconEl)
 		);
+
+		const sidebarsRibbonIconEl = this.addRibbonIcon(
+			"panel-left-close",
+			"Toggle both sidebars",
+			() => this.toggleSidebars(sidebarsRibbonIconEl)
+		);
 	}
 
 	onunload() {}
@@ -24,6 +30,21 @@ export default class ToggleWindowModePlugin extends Plugin {
 			leftSplit.collapse();
 			win.unmaximize();
 			setIcon(ribbonIconEl, "expand");
+		}
+	}
+
+	private toggleSidebars(ribbonIconEl: HTMLElement) {
+		const { leftSplit, rightSplit } = this.app.workspace;
+		const isCollapsed = leftSplit.collapsed;
+
+		if (isCollapsed) {
+			leftSplit.expand();
+			rightSplit.expand();
+			setIcon(ribbonIconEl, "panel-left-close");
+		} else {
+			leftSplit.collapse();
+			rightSplit.collapse();
+			setIcon(ribbonIconEl, "panel-left-open");
 		}
 	}
 }

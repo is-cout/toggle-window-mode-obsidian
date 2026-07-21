@@ -1,7 +1,7 @@
 {
   "id": "toggle-window-mode",
   "name": "Toggle Window Mode",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "minAppVersion": "1.4.0",
   "description": "Collapse the left sidebar and shrink the window, or expand both back, with one click",
   "author": "Lucas Coutinho",

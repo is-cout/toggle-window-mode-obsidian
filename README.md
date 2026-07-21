@@ -7,6 +7,7 @@ Collapse the left sidebar and shrink the window, or expand both back, with one c
 - Ribbon icon that toggles between two states:
   - **Compact**: collapses the left sidebar and restores (un-maximizes) the window to a smaller size.
   - **Expanded**: un-collapses the left sidebar and maximizes the window.
+- Second ribbon icon that toggles the left and right sidebars together (open/closed), independent of window mode.
 
 ## Install
 
