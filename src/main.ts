@@ -1,6 +1,9 @@
 import { Plugin, setIcon } from "obsidian";
 
 export default class ToggleWindowModePlugin extends Plugin {
+	private isWindowCompact = false;
+	private areSidebarsOpen = true;
+
 	onload() {
 		const ribbonIconEl = this.addRibbonIcon(
 			"shrink",
@@ -19,31 +22,34 @@ export default class ToggleWindowModePlugin extends Plugin {
 
 	private toggleWindowMode(ribbonIconEl: HTMLElement) {
 		const win = require("electron").remote.getCurrentWindow();
-		const leftSplit = this.app.workspace.leftSplit;
-		const isCompact = !win.isMaximized();
+		const { leftSplit, rightSplit } = this.app.workspace;
 
-		if (isCompact) {
+		this.isWindowCompact = !this.isWindowCompact;
+
+		if (this.isWindowCompact) {
+			leftSplit.collapse();
+			rightSplit.expand();
+			win.unmaximize();
+			setIcon(ribbonIconEl, "expand");
+		} else {
 			leftSplit.expand();
 			win.maximize();
 			setIcon(ribbonIconEl, "shrink");
-		} else {
-			leftSplit.collapse();
-			win.unmaximize();
-			setIcon(ribbonIconEl, "expand");
 		}
 	}
 
 	private toggleSidebars(ribbonIconEl: HTMLElement) {
 		const { leftSplit, rightSplit } = this.app.workspace;
-		const isCollapsed = leftSplit.collapsed;
 
-		if (isCollapsed) {
-			leftSplit.expand();
-			rightSplit.expand();
+		this.areSidebarsOpen = !this.areSidebarsOpen;
+
+		if (this.areSidebarsOpen) {
+			if (leftSplit.collapsed) leftSplit.expand();
+			if (rightSplit.collapsed) rightSplit.expand();
 			setIcon(ribbonIconEl, "panel-left-close");
 		} else {
-			leftSplit.collapse();
-			rightSplit.collapse();
+			if (!leftSplit.collapsed) leftSplit.collapse();
+			if (!rightSplit.collapsed) rightSplit.collapse();
 			setIcon(ribbonIconEl, "panel-left-open");
 		}
 	}

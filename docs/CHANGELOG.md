@@ -4,6 +4,14 @@ Living log of significant changes to the project. This is **not** optional bookk
 
 Format: `YYYY-MM-DD — short description. Why (if not obvious). Files touched.`
 
+## 2026-07-21 (0.2.2)
+
+- **Fix toggle state coupling**: each ribbon button now tracks its own independent target
+  state (`isWindowCompact`, `areSidebarsOpen`) instead of deriving it from workspace/window
+  state also touched by the other button. Sidebars toggle only opens/closes the splits that
+  don't already match the target; window mode toggle forces left closed + right open when
+  entering compact mode, left open + maximize when leaving it. Files: `src/main.ts`.
+
 ## 2026-07-21 (0.2.1)
 
 - **Fix window-mode/sidebars toggle conflict**: window mode button was reading left sidebar
