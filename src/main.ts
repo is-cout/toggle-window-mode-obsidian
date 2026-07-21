@@ -20,7 +20,7 @@ export default class ToggleWindowModePlugin extends Plugin {
 	private toggleWindowMode(ribbonIconEl: HTMLElement) {
 		const win = require("electron").remote.getCurrentWindow();
 		const leftSplit = this.app.workspace.leftSplit;
-		const isCompact = leftSplit.collapsed;
+		const isCompact = !win.isMaximized();
 
 		if (isCompact) {
 			leftSplit.expand();
