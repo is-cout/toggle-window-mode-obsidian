@@ -4,6 +4,11 @@ Living log of significant changes to the project. This is **not** optional bookk
 
 Format: `YYYY-MM-DD — short description. Why (if not obvious). Files touched.`
 
+## 2026-07-21 (0.2.0)
+
+- **Sidebars ribbon toggle**: adds second ribbon icon that collapses/expands left and right
+  sidebars together, independent of window mode. Files: `src/main.ts`.
+
 ## 2026-07-14 (0.1.0)
 
 - **Initial scaffold** from the Obsidian plugin bootstrap template. Files: all.
